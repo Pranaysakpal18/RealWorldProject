@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
@@ -9,10 +10,10 @@ const Sidebar = () => {
 
         <nav>
 
-            <a href="" className='block hover:bg-gray-700 py-2 rounded'>DashBoard</a>
-            <a href="" className='block hover:bg-gray-700 py-2 rounded'>Users</a>
-            <a href="" className='block hover:bg-gray-700 py-2 rounded'>Report</a>
-            <a href="" className='block hover:bg-gray-700 py-2 rounded'>Settings</a>
+            <Link to="/" className='block hover:bg-gray-700 py-2 rounded'>DashBoard</Link>
+            <Link to="users" className='block hover:bg-gray-700 py-2 rounded'>Users</Link>
+            <Link to="reports" className='block hover:bg-gray-700 py-2 rounded'>Report</Link>
+            <Link to="settings" className='block hover:bg-gray-700 py-2 rounded'>Settings</Link>
 
 
 

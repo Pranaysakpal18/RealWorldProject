@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import DashBoard from '../pages/DashBoard'
+import { Outlet } from 'react-router-dom'
 
 const DashboardLayout = () => {
   return (
@@ -15,6 +16,8 @@ const DashboardLayout = () => {
 
                 <main className='p-4'>
                     <DashBoard/>
+
+                    <Outlet/>
                 </main>
             </div>
         </div>
