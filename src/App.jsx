@@ -1,12 +1,14 @@
 import React from 'react'
-import Sidebar from './layouts/Sidebar'
-import Header from './layouts/Header'
+
+import DashboardLayout from './layouts/DAshboardLayout'
 
 const App = () => {
   return (
     <div>
-      <Header/>
-      <Sidebar/>
+
+
+      <DashboardLayout/>
+      
       
     </div>
   )
