@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { FaTasks } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { TbReportSearch } from "react-icons/tb";
@@ -13,6 +14,29 @@ const DashBoard = () => {
 
 
   ]
+
+  const [user,setUSer]=useState([])
+  const [loading,setLoading]=useState(true)
+  const [error,setError]=useState('')
+
+  useEffect(()=>{
+    setLoading(true)
+    setError('')
+    const fetchUsers=async()=>{
+      try{
+        const res= await axios.get('https://jsonplaceholder.typicode.com/users')
+
+        setUSer(res.data)
+      }catch(err){
+        setError("Failed to fetch users. Please try again Later")
+
+      }finally{
+        setLoading(false)
+      }
+
+    }
+    fetchUsers()
+  },[])
 
 
 
@@ -38,6 +62,46 @@ const DashBoard = () => {
       })}
       
     </div>
+
+    <div className='text-center mt-10'>
+      <h2 className='text-xl font-semibold mb-4'>User List</h2>
+
+     {
+      loading ? (
+        <p className='text-blue-500'>Loading Users</p>
+      ) : error ? (
+        <p className='text-red-500'>{error}</p>
+      ) : (
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+          {user.map((items)=>{
+            return(
+              <div className='bg-white p-4 rounded shadow' key={items.id}>
+                <p className='font-bold text-lg'>{items.name}</p>
+                <p>{items.email}</p>
+                <p className='text-sm text-gray-500'>{items.address.city}</p>
+
+              </div>
+            )
+
+          })}
+        </div>
+      )
+
+
+
+
+     }
+
+
+
+
+    </div>
+
+
+
+
+
+
     </div>
   )
 }
