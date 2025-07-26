@@ -1,8 +1,9 @@
 import React from 'react'
 
-const AuthLayout = () => {
+const AuthLayout = ({children}) => {
   return (
-    <div>
+    <div className='min-h-screen flex justify-center items-center bg-gray-100'>
+        {children}
       
     </div>
   )

@@ -5,6 +5,9 @@ import { Route, Router, Routes } from 'react-router-dom'
 import Users from './pages/Users'
 import Reports from './pages/Reports'
 import Settings from './pages/Settings'
+import AuthLayout from './layouts/AuthLayout'
+import Login from './pages/Login'
+import DashBoard from './pages/DashBoard'
 
 
 
@@ -23,6 +26,25 @@ const App = () => {
         <Route path='settings' element={<Settings/>}/>
 
         </Route>
+
+        <Route path='login' element={
+          <AuthLayout>
+            <Login/>
+          </AuthLayout>
+
+        }/>
+
+
+        <Route element={<DashboardLayout/>}>
+        <Route path='dashboard' element={<DashBoard/>}/>
+
+        </Route>
+
+
+        
+
+
+        
 
 
 

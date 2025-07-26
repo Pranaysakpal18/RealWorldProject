@@ -10,10 +10,11 @@ const Sidebar = () => {
 
         <nav>
 
-            <Link to="/" className='block hover:bg-gray-700 py-2 rounded'>DashBoard</Link>
+            <Link to="dashboard" className='block hover:bg-gray-700 py-2 rounded'>DashBoard</Link>
             <Link to="users" className='block hover:bg-gray-700 py-2 rounded'>Users</Link>
             <Link to="reports" className='block hover:bg-gray-700 py-2 rounded'>Report</Link>
             <Link to="settings" className='block hover:bg-gray-700 py-2 rounded'>Settings</Link>
+            <Link to="login" className='block hover:bg-gray-700 py-2 rounded'>Login</Link>
 
 
 
