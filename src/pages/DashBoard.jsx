@@ -47,6 +47,12 @@ const DashBoard = () => {
 
 
 
+  useEffect(()=>{
+    setCurrentPage(1)
+  },[searchTerm]);
+
+
+
 
 
   //Filter user By search
@@ -69,12 +75,25 @@ const DashBoard = () => {
   const totalPages = Math.ceil(filterUser.length / usersPerPage)
 
 
+  //skeleton Loader
+  const renderSkeletons=()=>{
+    return Array.from({length :6}).map((_,i)=>(
+      <div key={i} className='bg-gray-200 animate-pulse h-28 rounded shadow'></div>
+    ))
+  }
+
+
+
+
+
+
+
 
 
 
   return (
     <div>
-      <h1 className='text-2xl font-bold mb-6'>DashBoard OverView</h1>
+      <h1 className='text-2xl font-bold mb-6 text-center'>DashBoard OverView</h1>
 
     
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -117,7 +136,7 @@ const DashBoard = () => {
 
      {
       loading ? (
-        <p className='text-blue-500'>Loading Users</p>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>{renderSkeletons()}</div>
       ) : error ? (
         <p className='text-red-500'>{error}</p>
       ) : filterUser.length === 0 ?(
