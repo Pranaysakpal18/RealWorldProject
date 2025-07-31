@@ -8,6 +8,8 @@ import Settings from './pages/Settings'
 import AuthLayout from './layouts/AuthLayout'
 import Login from './pages/Login'
 import DashBoard from './pages/DashBoard'
+import Jobpost from './pages/Jobpost'
+import CreateUser from './pages/CreateUser'
 
 
 
@@ -18,6 +20,9 @@ const App = () => {
       <Routes>
 
         <Route path='/' element={<DashboardLayout/>}>
+        <Route index element={<DashBoard/>}/>
+
+         <Route path='dashboard' element={<DashBoard />} />
 
         <Route path='users' element={<Users/>}/>
 
@@ -25,9 +30,13 @@ const App = () => {
 
         <Route path='settings' element={<Settings/>}/>
 
+        <Route path='job-post' element={<Jobpost/>}/>
+
+        <Route path='/create-user' element={<CreateUser/>}/>
+
         </Route>
 
-        <Route path='login' element={
+        <Route path='/login' element={
           <AuthLayout>
             <Login/>
           </AuthLayout>
@@ -35,19 +44,7 @@ const App = () => {
         }/>
 
 
-        <Route element={<DashboardLayout/>}>
-        <Route path='dashboard' element={<DashBoard/>}/>
-
-        </Route>
-
-
         
-
-
-        
-
-
-
 
       </Routes>
 

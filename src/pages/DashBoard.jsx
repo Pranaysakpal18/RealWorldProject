@@ -23,6 +23,12 @@ const DashBoard = () => {
   const [currentPage , setCurrentPage] = useState(1);
   const [searchTerm , setSearchTerm] =useState('')
 
+  const [sortField , setSortField]=useState('')
+  const [sortOrder,setSortOrder] =useState('asc')
+
+
+
+
 
   const usersPerPage =5;
 
@@ -64,6 +70,17 @@ const DashBoard = () => {
   )
 
 
+  //Sorting logic Added for Day 10
+  const sortUsers =[...filterUser].sort((a,b)=>{
+    if(!sortField) return 0;
+    const aVal =a[sortField].toLowerCase();
+    const bVal =b[sortField].toLowerCase();
+    if(aVal < bVal) return sortOrder === 'asc' ? -1 :1;
+    if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+    return 0;
+  })
+
+
 
 
   //Pagination Logic 
@@ -73,6 +90,21 @@ const DashBoard = () => {
   const currentUSers = filterUser.slice(indexOfFirstUser,indexOfLastUser);
 
   const totalPages = Math.ceil(filterUser.length / usersPerPage)
+
+
+  //New handler for sorting
+  const handleSort =(field)=>{
+    if(sortField === field){
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    }else{
+      setSortField(field)
+      setSortOrder('asc')
+    }
+  };
+
+
+
+
 
 
   //skeleton Loader
@@ -141,39 +173,54 @@ const DashBoard = () => {
         <p className='text-red-500'>{error}</p>
       ) : filterUser.length === 0 ?(
         <p className='text-red-500'>No User Found.</p>
-      ) :(
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-          {currentUSers.map((items)=>{
-            return(
-              <div className='bg-white p-4 rounded shadow' key={items.id}>
-                <p className='font-bold text-lg'>{items.name}</p>
-                <p>{items.email}</p>
-                <p className='text-sm text-gray-500'>{items.address.city}</p>
+      ) :
+      (
 
-              </div>
-              
-            )
-
-          })}
+        <div className='overflow-x-auto'>
+          <table className='table-auto w-full border-collapse border border-gray-200'>
+            <thead>
+            <tr className='bg-gray-100'>
+              <th className='border px-4 py-2 cursor-pointer' onClick={()=>handleSort("name")}>
+                Name {sortField === 'name' && (sortOrder === 'asc' ? '🔼' : '🔽')}
+              </th>
+              <th className='border px-4 py-2'>Email</th>
+              <th className='border px-4 py-2 cursor-pointer' onClick={()=>handleSort('city')}>City {sortField === 'city' && (sortOrder === 'asc' ? '🔼' : '🔽' )}</th>
+            </tr>
+            </thead>
+            <tbody>
+              {currentUSers.map((user)=>(
+                <tr key={user.id} className='text-left'>
+                  <td className='border px-4 py-2'>{user.name}</td>
+                  <td className='border px-4 py-2'>{user.email}</td>
+                  <td className='border px-4 py-2'>{user.address.city}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        
-
-        
 
 
 
 
+        // <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+        //   {currentUSers.map((items)=>{
+        //     return(
+              
+
+        //       <div className='bg-white p-4 rounded shadow' key={items.id}>
+        //         <p className='font-bold text-lg'>{items.name}</p>
+        //         <p>{items.email}</p>
+        //         <p className='text-sm text-gray-500'>{items.address.city}</p>
+
+        //       </div>
+              
+        //     )
+
+        //   })}
+        // </div>
 
       )
-
-
-
-
      }
-
-
-
-
     </div>
 
     <div className='flex justify-between items-center mt-4'>
