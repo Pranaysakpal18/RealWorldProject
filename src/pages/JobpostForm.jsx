@@ -4,6 +4,8 @@ import InputField from '../components/InputField';
 import SelectField from '../components/SelectField';
 import UserForm from '../components/Forms/UserForm';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addJobPost } from '../Redux/JobSlice';
 
 const JobpostForm = () => {
     // const [formData,setFormData]=useState({
@@ -13,6 +15,12 @@ const JobpostForm = () => {
     //     salary:"",
     //     description:"",
     // });
+
+    const dispatch=useDispatch()
+
+
+
+
     const {
         register,
         handleSubmit,
@@ -75,6 +83,8 @@ const JobpostForm = () => {
 
     const onSubmit=(data)=>{
         console.log("Form Submitted:" ,data)
+        dispatch(addJobPost(data))
+        
         alert("Job Posted successfully!")
         reset()
 
